@@ -1,0 +1,22 @@
+<section class="vh-100" style="background-color: rgb(78, 78, 192);">
+    <div class="container py-5 h-100">
+        <div class="col-md-2 col-sm-12 text-center">
+            <a routerLink=""><h1>Volver</h1></a>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-4 col-sm-12 text-center">
+                <img class="img-fluid" width="320" alt="PKM #{{pokemon?.code}}_{{pokemon?.name}}" src="{{pokemon?.image}}" />
+            </div>
+            <div class="col-md-6 col-sm-12 text-left">
+                <h1>#{{pokemon?.code}}</h1>
+                <div class="">
+                    <h4>Tipo: <span style="color: {{pokemon?.types[0].color}}">{{pokemon?.types[0].name}}</span><span style="color: {{pokemon?.types[1].color}}" *ngIf="pokemon?.types.length > 1"> <span style="color: black;"> /</span> {{ pokemon?.types[1].name }}</span></h4>
+                </div>
+                <h5>Región: {{pokemon?.pokemon_region.name}}</h5>
+                <h3>{{ pokemon?.description}}</h3>
+
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,140 @@
+p {
+    line-height: 1.4;
+  }
+  
+  a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+  }
+  
+  a:link {
+    color: #000000;
+  }
+  
+  a:visited {
+    color: #437a16;
+  }
+  
+  a:focus {
+    border-bottom: 0px solid;
+    background: rgb(0,0,0,0);
+  }
+  
+  a:hover {
+    border-bottom: 0px solid;
+    background: rgb(0,0,0,0);
+  }
+  
+  a:active {
+    background: rgb(0,0,0,0);
+    color: red;
+  }
+  .custom-form {
+    width: 300px; /* Cambia el ancho según tus necesidades */
+    margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+    /* Agrega más estilos según sea necesario */
+  }
+
+  ngb-pagination ::ng-deep a {
+    color: black !important;
+  }
+  
+  ngb-pagination ::ng-deep .page-item.active .page-link {
+    border-color: black;
+    background-color: lightgrey;
+  }
+  
+  ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.1rem dimgrey;
+  }
+  
+  ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.1rem dimgrey;
+  }
+  
+  .demo-paginator {
+    width: 600px;
+    background-color: rgb(0,0,0,0);
+  }
+
+  .mat-grid-tile {
+    box-sizing: border-box; /* Asegura que el tamaño incluye el relleno y el borde */
+  }
+  
+  /* Asegura que cada elemento ocupe el ancho completo de su contenedor */
+  .text-center {
+    width: 100%;
+  }
+  
+  /* Ajusta el tamaño de cada elemento según el número de columnas */
+  @media (min-width: 400px) {
+    .mat-grid-tile {
+      fxFlex: calc(33.33% - 20px); /* 20px de espacio entre elementos, ajusta según tus necesidades */
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .mat-grid-tile {
+      fxFlex: calc(50% - 20px); /* 20px de espacio entre elementos, ajusta según tus necesidades */
+    }
+  }
+
+  ::ng-deep .mat-form-field .mat-input-element {
+    color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-label {
+    color: slategray!important;
+}
+::ng-deep .mat-form-field .mat-form-field-underline {
+    background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-ripple {
+    background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-required-marker {
+    color: slategray;
+}
+
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: #ff884d!important;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #ff884d;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-required-marker {
+    color: #ff884d;
+}
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
+    color: #ff884d;
+}
+
+
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
+    color: #ff33cc;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: #ff33cc!important;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+    color: #ff33cc;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+    background-color: #ff33cc;
+}
+
+::ng-deep  .mat-input-underline {
+  background-color: #FF0000;    /* replace this color with your accent color hex code */
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

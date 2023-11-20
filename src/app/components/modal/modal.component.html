@@ -1,0 +1,31 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-md-4 col-sm-12 text-center">
+        <img class="img-fluid" width="320" alt="PKM #{{pokemon.code}}_{{pokemon.name}}" src="{{pokemon.image}}" />
+    </div>
+    <div class="col-md-6 col-sm-12 text-center">
+        <h1>#{{pokemon.code}} #{{pokemon.name}}</h1>
+        <div class="" *ngIf="pokemon">
+            <h4>Tipo: 
+                <span *ngIf="pokemon.types && pokemon.types[0]">
+                <span [style.color]="pokemon.types[0].color">
+                    <img class="img-fluid" width="30" alt="PKM #{{pokemon.types[0].name}}" src="{{pokemon.types[0].image}}" /> {{pokemon.types[0].name}}
+                </span>
+                <span  [style.color]="pokemon.types[1].color" *ngIf="pokemon.types.length > 1"> <span style="color: black;"> / </span>
+                    <img class="img-fluid" width="30" alt="PKM #{{pokemon.types[1].name}}" src="{{pokemon.types[1].image}}" /> {{pokemon.types[1].name}}
+                </span>
+                </span>
+            </h4>
+        </div>
+        <h4 *ngIf="pokemon?.pokemon_region">
+            Región: {{pokemon.pokemon_region?.name}}
+        </h4>            
+
+        <h3>{{ pokemon.description}}</h3>    
+    </div>
+    <div mat-dialog-actions class="col-md-6 col-sm-12 text-center d-flex justify-content-center align-items-center">
+        <button mat-button (click)="onNoClick()" [routerLink]="['/pokemon', pokemon.id]">Ver Mas</button>
+        <button mat-button (click)="onNoClick()">Cerrar</button>
+    </div>
+    
+</div>
+

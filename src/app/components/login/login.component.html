@@ -1,0 +1,60 @@
+<section class="vh-100" style="background-color: rgb(78, 78, 192);">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN5HtUA5GJ6iSC8vVI03ZP591ZTCoQg-F6MDZ1CF9N4T_b0viDI55yqV_bRohVQXMhxeE&usqp=CAU"
+                  alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 100%; width: 100%;" />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                <div class="alert alert-danger" *ngIf="status == 'error'">
+                    No existe la cuenta.
+                </div>
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                        <img
+                        width="40"
+                        alt="Pokemon"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/2052px-Pok%C3%A9_Ball_icon.svg.png"
+                      />
+                      <span class="h1 fw-bold mb-0">{{page_title}}</span>
+                    </div>
+  
+                    <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingresa a tu cuenta</h5>
+  
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="formLogin19">Email</label>
+                        <input name="email" type="email" id="formLogin19" class="form-control form-control-lg" #email="ngModel" [(ngModel)]="
+                        user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                        <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El Email no es valido</small>
+                    </div>
+  
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="formLogin20">Contraseña</label>
+                        <input name="password" type="password" id="formLogin20" class="form-control form-control-lg" #password="ngModel" [(ngModel)]="
+                        user.password" required/>
+                        <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La contraseña no es valido</small>
+                    </div>
+  
+                    <div class="pt-1 mb-4">
+                      <button class="btn btn-dark btn-lg btn-block" type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
+                    </div>
+  
+                    <a class="small text-muted" href="#!">¿Olvisdate tu contraseña?</a>
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">¿No tienes cuenta?, <a routerLink="/register"
+                        style="color: #393f81;">Registrate aquí</a></p>
+                    <a href="#!" class="small text-muted">Terminos de uso.</a>
+                    <a href="#!" class="small text-muted">Politicas de Privacidad</a>
+                  </form>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

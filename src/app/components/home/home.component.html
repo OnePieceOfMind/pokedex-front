@@ -1,0 +1,66 @@
+<div class="container">
+    <h1 class="text-center">Pokemon</h1>
+    <div class="row justify-content-center">
+        <div class="d-flex flex-column flex-md-row justify-content-center">
+            <form #formGroup="ngForm" [formGroup]="filterForm">
+                <div class="d-flex justify-content-center" style="display: flex;">
+                    <mat-form-field>
+                        <mat-label>Region</mat-label>
+                        <mat-select formControlName="regions" multiple>
+                            <mat-option *ngFor="let reg of regionList" value="{{reg.id}}" #regionOption (click)="filterRegion(regionOption)">
+                                {{reg.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span style="margin: 10px;"></span>
+                    <mat-form-field>
+                        <mat-label>Tipo</mat-label>
+                        <mat-select formControlName="types" multiple>
+                            <mat-option *ngFor="let typ of typeList" value="{{typ.id}}" #typeOption (click)="filterType(typeOption)">
+                                {{typ.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>                    
+                </div>
+                <div class="flex-column justify-content-center" style="display: flex;">
+                    <mat-form-field> 
+                        <input matInput type="text" placeholder="Buscar Pokémon..." formControlName="searchText" (keyup)="onSearchKeyUp()">
+                    </mat-form-field>
+                </div>
+            </form>
+         </div>
+    </div>   
+    <div class="row justify-content-center">
+    <ng-container *ngIf="pokemon && pokemon.length > 0">
+        <div class="row col-sm-8 col-md-4" *ngFor="let pok of getPokemonForPage()">
+            <!-- Contenido del elemento -->
+            <div class="text-center"  (click)="openDialog(pok)">
+                    <img class="img-fluid" width="320" alt="PKM #{{pok?.code}}_{{pok?.name}}" src="{{pok?.image}}" />
+                    <h1 style="color: black;">#{{pok?.code}} {{pok?.name}}</h1>
+                    <div class="">
+                    <h4>Tipo: 
+                        <span *ngIf="pok?.types && pok?.types[0]">
+                        <span [style.color]="pok.types[0].color">
+                            <img class="img-fluid" width="30" alt="PKM #{{pok?.types[0].name}}" src="{{pok?.types[0].image}}" /> {{pok?.types[0].name}}
+                        </span>
+                        <span  [style.color]="pok.types[1].color" *ngIf="pok?.types.length > 1"> <span style="color: black;"> / </span>
+                            <img class="img-fluid" width="30" alt="PKM #{{pok?.types[1].name}}" src="{{pok?.types[1].image}}" /> {{pok?.types[1].name}}
+                        </span>
+                        </span>
+                    </h4>
+                    </div>
+                    <h4>Región: {{pok.pokemon_region.name}} </h4>
+            </div>
+        </div>
+        </ng-container>
+        <mat-paginator
+            class="demo-paginator"
+            [length]="pokemon.length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="onPageChange($event)"
+        ></mat-paginator>
+    </div>
+
+    <!-- Agregar paginador -->
+</div>

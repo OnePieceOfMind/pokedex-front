@@ -1,0 +1,63 @@
+<section class="vh-100" style="background-color: rgb(78, 192, 97);">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-10">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                <div class="alert alert-success" *ngIf="status == 'success'">
+                   Datos actualizados
+                </div>
+                <div class="alert alert-danger" *ngIf="status == 'error'">
+                    Los Datos no se han actualizado.
+                </div>
+                <form #updateUserForm="ngForm" (ngSubmit)="onSubmit(updateUserForm)">
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example17">Nombre</label>
+                        <input name="name" type="text" id="form2Example17" class="form-control form-control-lg" #name="ngModel" [(ngModel)]="
+                                user.name" required pattern="[a-zA-Z]+"/>
+                        <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">El Nombre no es valido</small>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example18">Apellido</label>
+                        <input name="surname" type="text" id="form2Example18" class="form-control form-control-lg" #surname="ngModel" [(ngModel)]="
+                        user.surname" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ]+"/>
+                        <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">El Apellido no es valido</small>
+                    </div>
+                    
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example19">Email</label>
+                        <input name="email" type="email" id="form2Example19" class="form-control form-control-lg" #email="ngModel" [(ngModel)]="
+                        user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                        <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El Email no es valido</small>
+                    </div>
+  
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example20">Descripción</label>
+                        <textarea name="description" id="form2Example20" class="form-control form-control-lg" #description="ngModel" [(ngModel)]="user.description"></textarea>
+
+                    </div>
+                    <!--
+                        <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example27">Repetir Contraseña</label>
+                        <input name="description_repeat" type="description" id="form2Example27" class="form-control form-control-lg" />
+                      </div>
+                    -->
+                    <div class="pt-1 mb-4">
+                      <button class="btn btn-dark btn-lg btn-block" type="submit" [disabled]="updateUserForm.invalid">Actualizar Datos</button>
+                    </div>
+                  </form>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
