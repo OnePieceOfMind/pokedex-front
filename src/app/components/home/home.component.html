@@ -31,7 +31,7 @@
          </div>
     </div>   
     <div class="row justify-content-center">
-    <ng-container *ngIf="pokemon && pokemon.length > 0">
+    <ng-container *ngIf="pokemon && pokemon.length > 0; else notFound">
         <div class="row col-sm-8 col-md-4" *ngFor="let pok of getPokemonForPage()">
             <!-- Contenido del elemento -->
             <div class="text-center"  (click)="openDialog(pok)">
@@ -53,6 +53,9 @@
             </div>
         </div>
         </ng-container>
+        <ng-template #notFound>
+            <h1>NO SE ENCONTRO POKEMON</h1>
+        </ng-template>
         <mat-paginator
             class="demo-paginator"
             [length]="pokemon.length"

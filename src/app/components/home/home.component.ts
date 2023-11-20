@@ -215,7 +215,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._pokemonService.filterPokemon(filters)
           .subscribe(
             (result) => {
-              this.pokemon = result.data; // Actualiza la lista de Pokémon con todos los resultados
+              if(!result){
+                this.pokemon = [];
+              }else{
+                this.pokemon = result.data; // Actualiza la lista de Pokémon con todos los resultados
+              }
             },
             (error) => {
               console.error('Error obteniendo la lista completa de Pokémon:', error);
