@@ -138,3 +138,37 @@ p {
 .example-full-width {
   width: 100%;
 }
+
+/* CSS personalizado */
+.d-flex.justify-content-center {
+  align-items: center;
+}
+
+.div-search {
+  flex-direction: column;
+}
+.div-search-input {
+  display: contents;
+}
+.not-found {
+  width: fit-content;
+}
+
+.search-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 18.5px 30px;
+
+  .ngk-search-icon,
+  .se-search {
+    margin-right: 10px;
+    margin-left: -16px;
+  }
+
+  .ngk-clear-icon {
+    align-self: flex-end;
+    margin-right: -16px;
+  }
+}
+

@@ -22,8 +22,8 @@
                         </mat-select>
                     </mat-form-field>                    
                 </div>
-                <div class="flex-column justify-content-center" style="display: flex;">
-                    <mat-form-field> 
+                <div class="d-flex flex-column justify-content-center div-search">
+                    <mat-form-field class="div-search-input"> 
                         <input matInput type="text" placeholder="Buscar Pokémon..." formControlName="searchText" (keyup)="onSearchKeyUp()">
                     </mat-form-field>
                 </div>
@@ -54,8 +54,11 @@
         </div>
         </ng-container>
         <ng-template #notFound>
+            <img class="not-found" alt="404 not found" src="https://www.pngplay.com/wp-content/uploads/12/Surprised-Pikachu-Transparent-Free-PNG.png" />
             <h1>NO SE ENCONTRO POKEMON</h1>
         </ng-template>
+    </div>
+    <div class="row justify-content-center" style="padding: 100px;">
         <mat-paginator
             class="demo-paginator"
             [length]="pokemon.length"
