@@ -11,3 +11,9 @@ export class User{
 
     ){}
 }
+
+export interface Password {
+    password_old: string;
+    password_new: string;
+    password_repeat: string;
+}

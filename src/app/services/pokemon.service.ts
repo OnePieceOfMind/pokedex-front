@@ -47,6 +47,13 @@ export class PokemonService {
     return this.__http.post(`${this.url}pokemon/filter`, params, {headers: headers});
   }
 
+  regionSearch(filters: any): Observable<any> {
+    let json = JSON.stringify(filters);
+    let params = 'regionSearch='+json;
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    return this.__http.post(`${this.url}region/filter`, params, {headers: headers});
+  }
+
   //filterPokemon(term: string, regions: number[], types: number[]): Observable<any> {
   /*filterPokemon(term: string): Observable<any> {
 

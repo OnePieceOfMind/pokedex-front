@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from '../../services/user.service';
 
@@ -13,9 +14,12 @@ export class RegisterComponent implements OnInit{
   public page_title: string;
   public user: User;
   public status: string;
+  public token: any;
 
   constructor(
-    private _userService: UserService
+    private _userService: UserService,
+    private _router: Router,
+
   ) {
     this.page_title = 'Registrate';
     this.user = new User(1, '', '', 'ROLE_USER', '', '', '', '');
@@ -23,6 +27,12 @@ export class RegisterComponent implements OnInit{
   }
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+
+    // Redirigir a la página principal si hay un token
+    if (token) {
+      this._router.navigate(['']); // Reemplaza 'home' con la ruta de tu página principal
+    }
   }
 
   onSubmit(form: any) {

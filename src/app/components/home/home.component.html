@@ -7,6 +7,11 @@
                     <mat-form-field>
                         <mat-label>Region</mat-label>
                         <mat-select formControlName="regions" multiple>
+                            <form #formGroup="ngForm" [formGroup]="regionForm">
+                                <mat-form-field>
+                                    <input matInput type="text" placeholder="Buscar Region..." formControlName="regionText" (keyup)="onSearchRegionKeyUp()">
+                                </mat-form-field>
+                            </form>
                             <mat-option *ngFor="let reg of regionList" value="{{reg.id}}" #regionOption (click)="filterRegion(regionOption)">
                                 {{reg.name}}
                             </mat-option>
@@ -16,6 +21,9 @@
                     <mat-form-field>
                         <mat-label>Tipo</mat-label>
                         <mat-select formControlName="types" multiple>
+                            <mat-form-field>
+                                <input matInput type="text" placeholder="Buscar Tipo..." formControlName="typeSearch" (keyup)="onSearchTypeKeyUp()">
+                            </mat-form-field>
                             <mat-option *ngFor="let typ of typeList" value="{{typ.id}}" #typeOption (click)="filterType(typeOption)">
                                 {{typ.name}}
                             </mat-option>

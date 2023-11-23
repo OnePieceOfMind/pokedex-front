@@ -12,7 +12,6 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
-import { ListComponent } from './components/list/list.component';
 import { ShowPokemonComponent } from './components/show-pokemon/show-pokemon.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
@@ -26,6 +25,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { ModalComponent } from './components/modal/modal.component';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { PasswordUpdateComponent } from './components/password-update/password-update.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +35,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     ErrorComponent,
     RegisterComponent,
     UserUpdateComponent,
-    ListComponent,
     ShowPokemonComponent,
     ModalComponent,
+    PasswordUpdateComponent,
   ],
   imports: [
     BrowserModule,

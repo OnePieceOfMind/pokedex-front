@@ -2,6 +2,8 @@ export class Region{
     constructor(
         public id: number,
         public name: string,
-        public created_at: any
+        public created_at: any,
+        public checked?: boolean,
+
     ){}
 }

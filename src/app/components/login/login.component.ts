@@ -33,6 +33,13 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit() {
+    const token = localStorage.getItem('token');
+
+    // Redirigir a la página principal si hay un token
+    if (token) {
+      this._router.navigate(['']); // Reemplaza 'home' con la ruta de tu página principal
+    }
+
     this.logout();
   }
 

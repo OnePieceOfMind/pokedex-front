@@ -52,6 +52,16 @@ export class UserService {
     return this.__http.patch(this.url+'auth/user/update', params, {headers: headers})
   }
 
+  password_update( token: any, user: any): Observable<any>{
+
+    let json = JSON.stringify(user);
+    let params = 'password='+json;
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+                                   .set('Authorization', `Bearer ${token}`);
+    return this.__http.patch(this.url+'auth/user/password', params, {headers: headers})
+  }
+
     // Agregar un nuevo método para actualizar el usuario en el localStorage
   updateLocalStorageUser(updatedUser: any): void {
     // Recuperar el usuario almacenado actualmente en el localStorage

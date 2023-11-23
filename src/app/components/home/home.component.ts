@@ -19,6 +19,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class HomeComponent implements OnInit, OnDestroy {
   page = 1;
   filterForm!: FormGroup;
+  regionForm!: FormGroup;
   pokemon: Pokemon[] = [];
   public regionList!: Region[];
   selectedRegions: number[] = [];
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private typeListSubscription: Subscription | undefined;
   pageSize = 9;
   pageSizeOptions: number[] = [9, 18, 27, 99];
-  searchTerm$ = new Subject<string>();
+  searchRegionTerm$ = new Subject<string>();
   private onDestroy$ = new Subject<void>();
   private listSubscription: Subscription | undefined;
   animal!: string;
@@ -42,41 +43,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       regions: [],
       types: [],
       searchText: ''
-    });
+   });
+   
+   this.regionForm = this.fb.group({
+      regionText: [],
+   });
 
-    this.filterForm.get('type')?.valueChanges
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(types => {
-        this.selectedTypes = types;
-        this.page = 1;
-        this.filterList();
-      });
-
-    this.searchTerm$
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap(searchText => {
-          const filters = {
-            searchText,
-            regions: this.selectedRegions,
-            types: this.selectedTypes
-          };
-
-          console.log('Filtering Pokémon list with filters:', filters);
-
-          return this._pokemonService.filterPokemon(filters);
-        }),
-        takeUntil(this.onDestroy$)
-      )
-      .subscribe(
-        result => {
-          this.pokemon = result;
-        },
-        error => {
-          console.error('Error filtering Pokémon list:', error);
-        }
-      );
   }
 
   ngOnInit() {
@@ -101,10 +73,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
 
       this.filterForm.setValue({
-    regions: [],    // valores iniciales de regions
-    types: [],      // valores iniciales de types
-    searchText: ''  // valor inicial de searchText
-  });
+        regions: [],    // valores iniciales de regions
+        types: [],      // valores iniciales de types
+        searchText: ''  // valor inicial de searchText
+      });
+
+      this.regionForm.setValue({
+        regionText: [],    // valores iniciales de regions
+      });
       
   }
 
@@ -117,14 +93,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.typeListSubscription.unsubscribe();
     }
 
-    if (this.searchTerm$) {
-      this.searchTerm$.unsubscribe();
-      this.searchTerm$ = new Subject<string>();
-    }
-
     this.regionListSubscription?.unsubscribe();
     this.typeListSubscription?.unsubscribe();
-    this.searchTerm$.unsubscribe();
     this.onDestroy$.next();
     this.onDestroy$.complete();
   }
@@ -143,15 +113,35 @@ export class HomeComponent implements OnInit, OnDestroy {
   filterRegion(regionOption: any) {
     const valueRegion = regionOption.value;
     const isChecked = regionOption.selected;
-
+  
     if (isChecked && !this.selectedRegions.includes(valueRegion)) {
       this.selectedRegions.push(valueRegion);
     } else if (!isChecked && this.selectedRegions.includes(valueRegion)) {
       this.selectedRegions = this.selectedRegions.filter(id => id !== valueRegion);
     }
+  
+    // Actualizamos la lista solo si hay regiones seleccionadas
+    if (this.selectedRegions.length > 0) {
+      this.searchRegion();
+    } else {
+      // Si no hay regiones seleccionadas, cargamos la lista completa
+      this._pokemonService.getRegion()
+        .subscribe(
+          (result: Region[]) => {
+            this.regionList = result;
+          },
+          (error) => {
+            console.error('Error obteniendo la lista completa de Pokémon:', error);
+          }
+        );
+    }
+  
     this.page = 1;
     this.filterList();
   }
+  
+  
+
   filterType(typeOption: any) {
     const valueTypes = typeOption.value;
     const isChecked = typeOption.selected;
@@ -165,6 +155,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.filterList();
   }
   
+  onSearchRegionKeyUp(): void {
+    this.searchRegion();
+  }
+
+  onSearchTypeKeyUp(): void {
+    console.log('ok')
+  }
 
   onSearchKeyUp(): void {
     this.page = 1;
@@ -234,6 +231,48 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  searchRegion(): void {
+    /*if (this.regionListSubscription) {
+      this.regionListSubscription.unsubscribe();
+    }*/
+    try {
+      const regionText = this.regionForm.get('regionText')?.value;
+      const selectedRegionsBeforeSearch = [...this.selectedRegions]; // Copia de las regiones seleccionadas
+  
+      const filters = { regionText };
+  
+      if (!regionText) {
+        this._pokemonService.getRegion()
+          .subscribe(
+            (result: Region[]) => {
+              this.regionList = result;
+              this.selectedRegions = selectedRegionsBeforeSearch; // Restaura las regiones seleccionadas
+            },
+            (error) => {
+              console.error('Error obteniendo la lista completa de Pokémon:', error);
+            }
+          );
+      } else {
+        this._pokemonService.regionSearch(filters)
+          .subscribe(
+            (result) => {
+              if (!result) {
+                this.regionList = [];
+              } else {
+                this.regionList = result.data;
+                this.selectedRegions = selectedRegionsBeforeSearch; // Restaura las regiones seleccionadas
+                //console.log( this.selectedRegions );
+              }
+            },
+            (error) => {
+              console.error('Error obteniendo la lista completa de Pokémon:', error);
+            }
+          );
+      }
+    } catch (error) {
+      console.error('Error en filterList:', error);
+    }
+  }
   
 
   getPokemonForPage(): any[] {
